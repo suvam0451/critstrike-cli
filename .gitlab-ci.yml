@@ -1,0 +1,15 @@
+image: fedora:latest
+
+stages:
+  - build
+BuildBinaries:
+  image: golang/latest
+  stage: build
+  script:
+    - mkdir -p bin/{linux,macos,win64}
+    - GOOS=windows GOARCH=amd64 go build -o ./bin/win64/critstrike.exe critstrike.go
+    - GOOS=darwin GOARCH=amd64 go build -o ./bin/macos/critstrike critstrike.go
+    - GOOS=linux GOARCH=amd64 go build -o ./bin/linux/critstrike critstrike.go
+  artifacts:
+    paths:
+      - ./bin

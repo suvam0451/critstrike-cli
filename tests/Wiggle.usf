@@ -1,0 +1,36 @@
+    MaterialFloat2 Local0 = (Parameters.TexCoords[0].xy * 1.00000000);
+    MaterialFloat Local1 = (1.00000000 - Local0.g);
+    MaterialFloat Local2 = (Local1 + View.GameTime);
+    MaterialFloat Local3 = sin(Local2);
+    MaterialFloat Local4 = (Local3 * RotationAngle);
+    return Local4;
+  
+
+    MaterialFloat Local5 = (Material.ScalarExpressions[0].x * Local4);
+    MaterialFloat Local6 = (Local5 * 6.28318548);
+    MaterialFloat4 Local7 = MaterialCollection0.Vectors[0];
+    MaterialFloat3 Local8 = TransformLocalPositionToWorld(Parameters, MaterialFloat4(MaterialFloat3(0.00000000,0.00000000,0.00000000),1.00000000).xyz).xyz;
+    MaterialFloat3 Local9 = (Local7.rgba.rgb - Local8);
+    MaterialFloat Local10 = dot(Local9, Local9);
+    MaterialFloat Local11 = sqrt(Local10);
+    MaterialFloat3 Local12 = (Local9 / Local11);
+    MaterialFloat3 Local13 = cross(Local12,MaterialFloat3(0.00000000,0.00000000,1.00000000));
+    MaterialFloat3 Local14 = TransformLocalPositionToWorld(Parameters, MaterialFloat4(MaterialFloat3(0.00000000,0.00000000,0.00000000),1.00000000).xyz).xyz;
+    MaterialFloat3 Local15 = RotateAboutAxis(MaterialFloat4(Local13,Local6),Local14,GetWorldPosition(Parameters));
+    MaterialFloat2 Local16 = (Parameters.TexCoords[0].xy * 1.00000000);
+    MaterialFloat Local17 = (1.00000000 - Local16.g);
+    MaterialFloat Local18 = (Local17 + View.PrevFrameGameTime);
+    MaterialFloat Local19 = (Local18 * 6.28318548);
+    MaterialFloat Local20 = sin(Local19);
+    MaterialFloat Local21 = (Material.ScalarExpressions[0].x * Local20);
+    MaterialFloat Local22 = (Local21 * 6.28318548);
+    MaterialFloat4 Local23 = MaterialCollection0.Vectors[0];
+    MaterialFloat3 Local24 = TransformLocalPositionToPrevWorld(Parameters, MaterialFloat4(MaterialFloat3(0.00000000,0.00000000,0.00000000),1.00000000).xyz).xyz;
+    MaterialFloat3 Local25 = (Local23.rgba.rgb - Local24);
+    MaterialFloat Local26 = dot(Local25, Local25);
+    MaterialFloat Local27 = sqrt(Local26);
+    MaterialFloat3 Local28 = (Local25 / Local27);
+    MaterialFloat3 Local29 = cross(Local28,MaterialFloat3(0.00000000,0.00000000,1.00000000));
+    MaterialFloat3 Local30 = TransformLocalPositionToPrevWorld(Parameters, MaterialFloat4(MaterialFloat3(0.00000000,0.00000000,0.00000000),1.00000000).xyz).xyz;
+    MaterialFloat3 Local31 = RotateAboutAxis(MaterialFloat4(Local29,Local22),Local30,GetPrevWorldPosition(Parameters));
+    return Local31;;

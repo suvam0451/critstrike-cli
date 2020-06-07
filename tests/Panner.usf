@@ -1,0 +1,15 @@
+// Assuming our input node is Input (float3) 
+
+/*
+    @name           PannerFunction
+    @desc           Similar to panner node. Flows in a direction.
+    @param          size               float1       
+    @param          direction          float3       10.0f       Direction of flow.
+    @param          offset             float3       20.0f       By what value to offset.
+    @tessellation   2
+    @usewith        Niagara 
+*/
+
+float3 panbase = (View.GameTime * direction) + GetWorldPosition(Parameters) / size; // Size determines XY size of each block
+float3 panoffset = frac(panbase + offset);
+return panoffset;

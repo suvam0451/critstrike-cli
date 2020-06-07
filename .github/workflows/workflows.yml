@@ -1,0 +1,30 @@
+name: Build and Test
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  lint:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: []
+    steps:
+      - name: Setup go
+        uses: actions/setup-go@v1
+        with:
+          go-version: 1.14
+      - name: Check out code
+        uses: actions/checkout@v1
+      - name: Make Builds
+        run: |
+          mkdir -p bin/{linux,macos,win64}
+          GOOS=windows GOARCH=amd64 go build -o ./bin/win64/critstrike.exe main.go
+          GOOS=darwin GOARCH=amd64 go build -o ./bin/macos/critstrike main.go
+          GOOS=linux GOARCH=amd64 go build -o ./bin/linux/critstrike main.go
+      - name: Artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: builds
+          path: ./bin
