@@ -3,7 +3,7 @@ image: fedora:latest
 stages:
   - build
 BuildBinaries:
-  image: golang/latest
+  image: golang:latest
   stage: build
   script:
     - mkdir -p bin/{linux,macos,win64}
